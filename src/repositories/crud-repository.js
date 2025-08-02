@@ -38,12 +38,26 @@ class CrudRepository {
 
     async update(id,data){ // data -> {col:value, ...}
 
-        const response = await this.model.update(data,{
+
+       try{
+        const [response] = await this.model.update(data,{
          where:{
             id:id
          }
         });
+         if(response == 0){
+
+          throw new AppError('Not able to find the resource',StatusCodes.NOT_FOUND)
+        }
+
         return response;
+      }catch (error) {
+           if(error.errors[0].type == 'Validation error'){
+            throw new AppError(error.errors[0].message,StatusCodes.BAD_REQUEST)
+
+           }
+            throw new AppError("Something went wrong",StatusCodes.INTERNAL_SERVER_ERROR)
+        }
     }
 
 
