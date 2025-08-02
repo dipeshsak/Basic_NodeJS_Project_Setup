@@ -6,5 +6,7 @@ const {airplaneMiddleware}  = require('../../middlewares')
 const router = express.Router();
 
 router.post('/',airplaneMiddleware.validateCreateRequest, AirplaneController.createAirplane);
+router.get('/', AirplaneController.getAirplanes);
+
 
 module.exports = router;
