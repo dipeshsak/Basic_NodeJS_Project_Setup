@@ -25,6 +25,7 @@ class CrudRepository {
 
     async get(data){
         const response = await this.model.findByPk(data);
+
         if(!response){
           throw new AppError('Not able to find the resource',StatusCodes.NOT_FOUND)
         }
@@ -33,11 +34,12 @@ class CrudRepository {
 
      async getAll(){
         const response = await this.model.findAll();
+
         return response;
     }
 
     async update(id,data){ // data -> {col:value, ...}
-
+       
 
        try{
         const [response] = await this.model.update(data,{
@@ -45,6 +47,9 @@ class CrudRepository {
             id:id
          }
         });
+
+
+
          if(response == 0){
 
           throw new AppError('Not able to find the resource',StatusCodes.NOT_FOUND)
