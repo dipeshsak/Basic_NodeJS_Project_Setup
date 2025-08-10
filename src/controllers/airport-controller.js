@@ -75,7 +75,6 @@ async function deleteAirport(req,res){
  * req-body - {name: 'IGI', cityId: 5, code: 'DEL',address :'Mumbai'}
  */
 async function updateAirports(req,res){
-    console.log("BODY",req.params.id,req.body)
     try{
         const airport = await AirportService.updateAirport(req.params.id,req.body);
 
